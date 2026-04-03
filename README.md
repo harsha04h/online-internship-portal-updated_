@@ -1,4 +1,5 @@
 🚀 Project Overview
+
 This repository was developed as a personal learning milestone to explore modern web technologies and interactive UI patterns. This project served as an introduction to:
 
 Interactive UI & Animations: Mastering complex sliding transitions and toggle animations (moving the login/sign-up panels side-to-side) to create a seamless, single-page user experience.
