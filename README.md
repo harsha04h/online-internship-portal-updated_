@@ -12,6 +12,7 @@ Backend Logic: Implementing secure PHP session handling and case-sensitive (BINA
 Note: This project was developed strictly for educational and demonstration purposes to practice full-stack integration and interactive CSS; it is not intended for production or future commercial use.
 
 🎨 Credits & Inspiration
+
 UI/UX & Animation Inspiration: The core visual layout and sliding panel animations for the Login and Registration pages were inspired by the work of @codehal.
 
 Tutorial Link: https://www.youtube.com/watch?v=mefhyo7W3nk
