@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body { background-color: #081b29; color: white; font-family: 'Poppins', sans-serif; padding: 20px; }
+
+        /* Search Bar Restored */
+        #sch {
+            width: 90%; height: 50px; background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #0ef; border-radius: 40px; color: white;
+            padding: 0 25px; margin: 0 auto 30px auto; display: block; outline: none;
+            box-shadow: 0 0 10px rgba(14, 239, 255, 0.1);
+        }
+
+        /* Internship Cards Restored with Full Details */
+        .internship-card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(14, 239, 255, 0.3);
+            border-radius: 15px; padding: 25px; margin: 20px auto; width: 92%; transition: .4s;
+        }
+        .internship-card:hover { border-color: #0ef; background: rgba(14, 239, 255, 0.05); transform: translateY(-5px); }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; }
+        .title { font-size: 22px; font-weight: 700; color: #0ef; }
+        .company { font-size: 16px; opacity: 0.7; }
+        .logo-box {
+            width: 50px; height: 50px; border: 1px solid #0ef; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-weight: 800; color: #0ef;
+        }
+
+        .tag {
+            background: rgba(14, 239, 255, 0.15); color: #0ef; padding: 4px 12px;
+            border-radius: 5px; font-size: 12px; margin-right: 8px; display: inline-block; margin-top: 10px;
+        }
+
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; margin: 20px 0; font-size: 14px; }
+
+        .apply-btn {
+            padding: 10px 30px; background: #0ef; color: #081b29; border: none;
+            border-radius: 40px; font-weight: 700; cursor: pointer; transition: .3s;
+        }
+        .apply-btn.applied { background: #112d42; color: #0ef; border: 1px solid #0ef; cursor: default; }
+
+        /* Modal & Popups */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: #081b29; margin: 10% auto; padding: 30px; border: 2px solid #0ef;
+            width: 400px; border-radius: 15px; box-shadow: 0 0 25px rgba(14, 239, 255, 0.2);
+        }
+        .modal-content input {
+            width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.05);
+            border: 1px solid #0ef; color: white; border-radius: 5px; box-sizing: border-box;
+        }
+        #success-msg {
+            display: none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: #0ef; color: #081b29; padding: 15px 40px; border-radius: 8px;
+            font-weight: bold; box-shadow: 0 0 20px #0ef; z-index: 2000;
+        }
+    </style>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <div id="success-msg">Successfully Applied!</div>
+
+    <input type="text" id="sch" placeholder="Search by title, company, or skills..." onkeyup="filterInternships()">
+
+    <div id="applyModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title" style="color:#0ef;">Apply</h2>
+            <form id="applyForm">
+                <input type="text" placeholder="Full Name" required>
+                <input type="file" accept=".pdf" required>
+                <button type="submit" class="apply-btn" style="width:100%">Confirm Application</button>
+                <p onclick="closeModal()" style="text-align:center; cursor:pointer; margin-top:15px; font-size:12px; color:#aaa;">Cancel</p>
+            </form>
+        </div>
+    </div>
+
+    <div id="internship-container">
+        <div class="internship-card" data-job-id="1">
+            <div class="card-header">
+                <div><div class="title">AI / ML Research Intern</div><div class="company">TechNova Solutions</div></div>
+                <div class="logo-box">TN</div>
+            </div>
+            <div><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Remote</span></div>
+            <div class="details-grid">
+                <div><b>Stipend:</b> ₹12,000 / Month</div>
+                <div><b>Duration:</b> 4 Months</div>
+            </div>
+            <button class="apply-btn" onclick="checkAndOpen(1, 'AI / ML Research Intern')">Apply Now</button>
+        </div>
+
+        <div class="internship-card" data-job-id="2">
+            <div class="card-header">
+                <div><div class="title">Full Stack Developer</div><div class="company">InnovateSoft Systems</div></div>
+                <div class="logo-box">IS</div>
+            </div>
+            <div><span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">Hybrid</span></div>
+            <div class="details-grid">
+                <div><b>Stipend:</b> ₹15,000 / Month</div>
+                <div><b>Duration:</b> 6 Months</div>
+            </div>
+            <button class="apply-btn" onclick="checkAndOpen(2, 'Full Stack Developer')">Apply Now</button>
+        </div>
+
+        <div class="internship-card" data-job-id="3">
+            <div class="card-header">
+                <div><div class="title">Cyber Security Intern</div><div class="company">SecureNet India</div></div>
+                <div class="logo-box">SN</div>
+            </div>
+            <div><span class="tag">Ethical Hacking</span><span class="tag">Linux</span><span class="tag">Onsite</span></div>
+            <div class="details-grid">
+                <div><b>Stipend:</b> ₹10,000 / Month</div>
+                <div><b>Duration:</b> 3 Months</div>
+            </div>
+            <button class="apply-btn" onclick="checkAndOpen(3, 'Cyber Security Intern')">Apply Now</button>
+        </div>
+
+        <div class="internship-card" data-job-id="4">
+            <div class="card-header">
+                <div><div class="title">Data Science Intern</div><div class="company">DataSphere Analytics</div></div>
+                <div class="logo-box">DS</div>
+            </div>
+            <div><span class="tag">SQL</span><span class="tag">PowerBI</span><span class="tag">Remote</span></div>
+            <div class="details-grid">
+                <div><b>Stipend:</b> ₹18,000 / Month</div>
+                <div><b>Duration:</b> 5 Months</div>
+            </div>
+            <button class="apply-btn" onclick="checkAndOpen(4, 'Data Science Intern')">Apply Now</button>
+        </div>
+    </div>
+
+    <script>
+        let activeJobId = null;
+
+        window.onload = function() {
+            const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || "[]");
+            appliedJobs.forEach(id => updateButtonToApplied(id));
+        };
+
+        function filterInternships() {
+            let input = document.getElementById('sch').value.toLowerCase();
+            let cards = document.getElementsByClassName('internship-card');
+            for (let card of cards) {
+                card.style.display = card.innerText.toLowerCase().includes(input) ? "block" : "none";
+            }
+        }
+
+        function checkAndOpen(id, title) {
+            const appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || "[]");
+            if (appliedJobs.includes(id)) return;
+            activeJobId = id;
+            document.getElementById('modal-title').innerText = "Apply: " + title;
+            document.getElementById('applyModal').style.display = "block";
+        }
+
+        function closeModal() { document.getElementById('applyModal').style.display = "none"; }
+
+        function updateButtonToApplied(id) {
+            const card = document.querySelector(`.internship-card[data-job-id="${id}"]`);
+            if (card) {
+                const btn = card.querySelector('.apply-btn');
+                btn.innerText = "Applied";
+                btn.classList.add('applied');
+            }
+        }
+
+        document.getElementById('applyForm').onsubmit = function(e) {
+            e.preventDefault();
+            let appliedJobs = JSON.parse(localStorage.getItem('appliedJobs') || "[]");
+            appliedJobs.push(activeJobId);
+            localStorage.setItem('appliedJobs', JSON.stringify(appliedJobs));
+            updateButtonToApplied(activeJobId);
+            closeModal();
+            const msg = document.getElementById('success-msg');
+            msg.style.display = "block";
+            setTimeout(() => { msg.style.display = "none"; }, 3000);
+        };
+    </script>
+</body>
+</html>
