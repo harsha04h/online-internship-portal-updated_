@@ -1,0 +1,17 @@
+<?php include "auth.php"; ?> 
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>frames</title> 
+    </head> 
+    <frameset style="color: brown;" cols ="20%,60%,20%" border="1" frameborder="1" framespacing="1"> 
+        <frame name="left"src="left.html"/> 
+        <frame name="middle"src="middle.html"/> 
+        <frame name="right"src="right.php"/>
+        <noframes> 
+            <body>
+                Your browser doesn't support frames
+            </body> 
+        </noframes>
+    </frameset> 
+</html>
