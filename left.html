@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            background-color: #081b29; /* Matches login background */
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        label b {
+            color: #0ef; /* Neon cyan accent */
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+            border-left: 2px solid #0ef;
+            padding-left: 15px;
+        }
+
+        input[type="checkbox"] {
+            accent-color: #0ef;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        #sub, .logout-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px;
+            background: transparent;
+            color: #fff;
+            border: 2px solid #0ef;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: .5s;
+        }
+
+        #sub:hover, .logout-btn:hover {
+            background: #0ef;
+            color: #081b29;
+            box-shadow: 0 0 15px #0ef;
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.jpeg" alt="logo" style="width:140px; height:auto; filter: drop-shadow(0 0 5px #0ef); margin-bottom: 20px;">
+    
+    <div class="filter-group">
+        <label><b>Internship Type</b></label><br><br>
+        <form>
+            <input type="checkbox" id="pt"> <label for="pt"> Part-time</label><br>
+            <input type="checkbox" id="ft"> <label for="ft"> Full-time</label>
+        </form>
+    </div>
+
+    <div class="filter-group">
+        <label><b>Domain</b></label><br><br>
+        <form>
+            <input type="checkbox" id="ai"> <label for="ai"> AIML</label><br>
+            <input type="checkbox" id="wd"> <label for="wd"> Web Dev</label><br>
+            <input type="checkbox" id="cs"> <label for="cs"> Cyber Security</label>
+        </form>
+    </div>
+
+    <div class="filter-group">
+        <label><b>Location</b></label><br><br>
+        <form>
+            <input type="checkbox" id="mumbai"> <label for="mumbai"> Mumbai</label><br>
+            <input type="checkbox" id="bangalore"> <label for="bangalore"> Bangalore</label><br>
+            <input type="checkbox" id="pune"> <label for="pune"> Pune</label><br>
+            <input type="checkbox" id="delhi"> <label for="delhi"> Delhi NCR</label>
+        </form>
+    </div>
+
+    <input id="sub" type="submit" value="Apply Filters">
+
+    <form action="logout.php" method="POST" target="_top">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+</body>
+</html>
